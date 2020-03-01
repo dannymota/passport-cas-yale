@@ -77,7 +77,6 @@ function Strategy(options, verify) {
                         }
                         try {
                             var response = result.envelope.body.response;
-                            console.log(response);
                             var success = response.status.statuscode['$'].Value.match(/Success$/);
                             if (success) {
                                 var attributes = {};
@@ -159,7 +158,7 @@ Strategy.prototype.authenticate = function (req, options) {
 
     var service = this.service(req);
 
-    var ticket = req.param('ticket');
+    var ticket = req.params.ticket;
     if (!ticket) {
         var redirectURL = url.parse(this.ssoBase + '/login', true);
 
@@ -189,6 +188,7 @@ Strategy.prototype.authenticate = function (req, options) {
     var _handleResponse = function (response) {
         response.setEncoding('utf8');
         var body = '';
+        console.log("Response:", response);
         response.on('data', function (chunk) {
             return body += chunk;
         });

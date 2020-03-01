@@ -1,6 +1,6 @@
 {
   "name": "passport-cas-yale",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yale CAS authentication strategies for Passport.",
   "main": "index.js",
   "scripts": {},
