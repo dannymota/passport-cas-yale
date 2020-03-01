@@ -9,7 +9,7 @@ Yale CAS authentication strategies redeveloped for Passport.
 
 #### Configure Strategy
     passport.use(new (require('passport-cas-yale').Strategy)({
-      ssoBaseURL: 'https://secure.its.yale.edu/cas/login',
+      ssoBaseURL: 'https://secure.its.yale.edu/cas',
       serverBaseURL: 'http://localhost:8080'
     }, function(login, done) {
       User.findOne({login: login}, function (err, user) {
