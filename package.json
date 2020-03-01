@@ -1,0 +1,27 @@
+{
+  "name": "passport-cas-yale",
+  "version": "0.0.1",
+  "description": "Yale CAS authentication strategies for Passport.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dannymota/passport-cas-yale.git"
+  },
+  "keywords": [
+    "passport",
+    "auth",
+    "cas"
+  ],
+  "author": "Danny Mota",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dannymota/passport-cas-yale/issues"
+  },
+  "homepage": "https://github.com/dannymota/passport-cas-yale",
+  "dependencies": {
+    "node-uuid": "1.4.1",
+    "underscore": "1.6.0",
+    "xml2js" : "0.4.4"
+  }
+}
