@@ -1,6 +1,4 @@
-/**
- * Yale CAS 0.0.5
- */
+console.log("Passport CAS Yale");
 var _ = require('underscore'),
   url = require('url'),
   http = require('http'),
@@ -34,7 +32,6 @@ function Strategy(options, verify) {
 
   passport.Strategy.call(this);
 
-
   this.name = 'cas';
   this._verify = verify;
   this._passReqToCallback = options.passReqToCallback;
@@ -49,29 +46,38 @@ function Strategy(options, verify) {
   var self = this;
   switch (this.version) {
     case "CAS1.0":
+      console.log("1.0 case");
       this._validateUri = "/validate";
       this._validate = function(req, body, verified) {
         var lines = body.split('\n');
+        console.log(lines);
         if (lines.length >= 1) {
           if (lines[0] === 'no') {
+            console.log("lines[0] is no");
             return verified(new Error('Authentication failed'));
           } else if (lines[0] === 'yes' && lines.length >= 2) {
+            console.log("lines[0] is yes");
             if (self._passReqToCallback) {
+              console.log("req, lines[1], verified");
               self._verify(req, lines[1], verified);
             } else {
+              console.log("lines[1], verified");
               self._verify(lines[1], verified);
             }
             return;
           }
         }
+        console.log("The response from the server was bad");
         return verified(new Error('The response from the server was bad'));
       };
       break;
     case "CAS3.0":
+      console.log("3.0 case");
       if (this.useSaml) {
         this._validateUri = "/samlValidate";
         this._validate = function(req, body, verified) {
           parseString(body, xmlParseOpts, function(err, result) {
+            console.log(result);
             if (err) {
               return verified(new Error('The response from the server was bad'));
             }
@@ -101,10 +107,11 @@ function Strategy(options, verify) {
           });
         };
       } else {
+        console.log("Else case");
         this._validateUri = "/p3/serviceValidate";
         this._validate = function(req, body, verified) {
           parseString(body, xmlParseOpts, function(err, result) {
-
+            console.log(result);
             if (err) {
               return verified(new Error('The response from the server was bad'));
             }
@@ -131,6 +138,7 @@ function Strategy(options, verify) {
       }
       break;
     default:
+      console.log("Default case");
       throw new Error('unsupported version ' + this.version);
   }
 }
@@ -159,7 +167,7 @@ Strategy.prototype.authenticate = function(req, options) {
 
   var service = this.service(req);
 
-  var ticket = req.params.ticket;
+  var ticket = req.param('ticket');
   if (!ticket) {
     var redirectURL = url.parse(this.ssoBase + '/login', true);
 
