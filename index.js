@@ -188,7 +188,6 @@ Strategy.prototype.authenticate = function (req, options) {
     var _handleResponse = function (response) {
         response.setEncoding('utf8');
         var body = '';
-        console.log("Response:", response);
         response.on('data', function (chunk) {
             return body += chunk;
         });
