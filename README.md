@@ -1,4 +1,4 @@
-# passport-cas
+# passport-cas-yale
 
 Yale CAS authentication strategies redeveloped for Passport.
 
